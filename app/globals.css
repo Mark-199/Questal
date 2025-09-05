@@ -1,0 +1,14 @@
+@import "tailwindcss";
+@plugin "daisyui" {themes: lemonade --default ,forest --prefersdark ;}
+
+
+/* =======================
+   4️⃣ Tooltip / Chat Tail SVG (svg)
+   ======================= */
+.tooltip::after {
+  content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="5"><polygon points="0,0 10,0 5,5" fill="var(--base-content)"/></svg>');
+}
+
+.chat-bubble::after {
+  content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="5"><polygon points="0,5 10,5 5,0" fill="var(--base-content)"/></svg>');
+}
