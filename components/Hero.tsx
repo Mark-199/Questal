@@ -24,12 +24,12 @@ export const Hero: React.FC<HeroProps> = ({
       
       {/* Text Content */}
       <div className="flex-1 flex flex-col gap-4">
-        <h1 className="text-4xl md:text-6xl font-bold text-secondary">{title}</h1>
+        <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-secondary">{title}</h1>
         {subtitle && (
-          <p className="text-lg md:text-xl neutral-content">{subtitle}</p>
+          <p className=" md:text-base lg:text-lg neutral-content">{subtitle}</p>
         )}
         {ctaText && ctaLink && (
-          <Link href={ctaLink} className="btn btn-primary w-max mt-4 text-white">
+          <Link href={ctaLink} className="btn btn-primary rounded w-max mt-4 text-white">
             {ctaText}
           </Link>
         )}
@@ -43,7 +43,7 @@ export const Hero: React.FC<HeroProps> = ({
             alt="Hero Image"
             height={400}
             width={500}
-            className="rounded-lg drop-shadow-sm object-cover w-full h-auto"
+            className="md:text-base lg:text-lg drop-shadow-sm object-cover w-full h-auto"
           />
         </div>
       )}

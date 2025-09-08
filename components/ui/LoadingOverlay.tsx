@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const messages = [
   "Embarking on your quest...",
@@ -18,18 +18,15 @@ export function LoadingOverlay() {
   const [message, setMessage] = useState(messages[0]);
 
   useEffect(() => {
-    // When path changes -> show loader briefly
+    // Trigger immediately when route changes
     setMessage(messages[Math.floor(Math.random() * messages.length)]);
     setLoading(true);
-
-    // Disable scrolling
     document.body.classList.add("overflow-hidden");
 
-    // Remove loader after render finishes
     const timer = setTimeout(() => {
       setLoading(false);
-      document.body.classList.remove("overflow-hidden"); // re-enable scroll
-    }, 600);
+      document.body.classList.remove("overflow-hidden");
+    }, 600); // adjust duration
 
     return () => {
       clearTimeout(timer);
@@ -41,10 +38,7 @@ export function LoadingOverlay() {
 
   return (
     <div className="fixed inset-0 flex flex-col items-center justify-center bg-base-200/90 z-50">
-      {/* DaisyUI spinner */}
       <span className="loading loading-infinity loading-lg text-primary"></span>
-
-      {/* Animated random message */}
       <p className="mt-4 text-lg font-semibold animate-pulse text-center max-w-sm">
         {message}
       </p>

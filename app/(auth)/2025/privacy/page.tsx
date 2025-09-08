@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import Link from "next/link";
 import Privacy from '@/components/Privacy'
 import { BackButton } from '@/components/ui/BackButton'
 

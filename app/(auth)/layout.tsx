@@ -7,7 +7,7 @@ import { Footer } from '@/components/Footer';
 import { LoadingOverlay } from "@/components/ui/LoadingOverlay";
 
 export const metadata: Metadata = {
-  title: "Authentication | Questal",
+  title: "Auth | Questal",
   description: "Questal app for everyone - your are in oath page",
   icons: {
     icon: "/Questal.png", 
@@ -28,8 +28,10 @@ export default function RootLayout({
         navLinks={[]}
         actions={[]}
       />
-      <LoadingOverlay/>
-      <ThemeProvider>{children}</ThemeProvider>
+      <LoadingOverlay />
+        <ThemeProvider>
+            {children}
+        </ThemeProvider>
       <Footer/>
       </body>
     </html>

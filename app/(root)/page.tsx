@@ -12,7 +12,7 @@ export default function LandingPage() {
         title="Welcome to Questal"
         subtitle="Discover the power of collaborative learning and community."
         ctaText="Get Started"
-        ctaLink="/signup"
+        ctaLink="/login"
         heroImageSrc="/Hero.png"
       />
 

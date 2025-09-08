@@ -27,7 +27,7 @@ const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) =>
     return () => mediaQuery.removeEventListener("change", listener);
   }, []);
 
-  return <>{children}</>;
+  return <div data-current-theme={theme}>{children}</div>;
 };
 
 export default ThemeProvider;

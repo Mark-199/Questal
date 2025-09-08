@@ -26,12 +26,7 @@ export default function RootLayout({
     <Header
       title="Questal"
       logoSrc="/Questal.png"
-      navLinks={[
-        { name: "About", href: "/about" },
-        { name: "Event", href: "/event" },
-        { name: "Community", href: "/community" },
-        { name: "Star", href: "/star" },
-      ]}
+      navLinks={[]}
     />
     <LoadingOverlay />
     <ThemeProvider>{children}</ThemeProvider>

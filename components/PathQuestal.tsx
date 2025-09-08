@@ -49,22 +49,16 @@ export function PathQuestal({ maxSteps }: PathQuestalProps) {
       <div className="max-w-5xl mx-auto text-center space-y-6">
         <h2
           id="path-questal-title"
-          className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-primary"
+          className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-primary"
         >
           The Questal Path
         </h2>
-        <p className="text-lg md:text-xl lg:text-2xl max-w-3xl mx-auto">
+        <p className="text-lg md:text-xl max-w-3xl mx-auto">
           Our journey forward — one meaningful step at a time, together with you.
         </p>
 
         {/* Steps Timeline */}
-        <ol
-          className="
-            steps steps-vertical lg:steps-horizontal w-full mt-12
-            gap-8 lg:gap-4
-            pl-4 sm:pl-6 md:pl-8
-          "
-        >
+        <ol className="steps steps-vertical lg:steps-horizontal w-full mt-12">
           {visibleSteps.map((step, index) => (
             <li
               key={index}
@@ -73,10 +67,10 @@ export function PathQuestal({ maxSteps }: PathQuestalProps) {
               data-content={index + 1}
             >
               <div className="p-5 max-w-xs mx-auto text-left">
-                <h3 className="font-semibold text-lg md:text-xl lg:text-2xl mb-2">
+                <h3 className="font-semibold text-lg md:text-xl mb-2">
                   {step.title}
                 </h3>
-                <p className="text-sm md:text-base lg:text-lg text-gray-700 dark:text-gray-300 opacity-90">
+                <p className="text-sm md:text-base text-gray-700 dark:text-gray-300 opacity-90">
                   {step.description}
                 </p>
               </div>

@@ -1,86 +1,92 @@
-"use client";
+'use client';
 
 import { useState } from "react";
-import Link from "next/link";
-import { LoginEmailInput } from "@/components/form/LoginEmailInput";
-import { LoginPasswordInput } from "@/components/form/LoginPasswordInput";
-import { SubmitButton } from "@/components/form/SubmitButton";
+import { supabaseBrowser } from "@/utils/supabase/client";
+import { Mail } from "lucide-react";
+import { FcGoogle } from "react-icons/fc";
+import { EmailInput } from "./EmailInput"; // same folder
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
+  const [sent, setSent] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [emailValid, setEmailValid] = useState(false);
-  const [password, setPassword] = useState("");
-  const [passwordValid, setPasswordValid] = useState(false);
 
-  const formValid = emailValid && passwordValid;
+  async function signInWithMagicLink(e: React.FormEvent) {
+    e.preventDefault();
+    if (!emailValid) return; // prevent sending if invalid
+    setError(null);
+    const supabase = supabaseBrowser();
+    const origin = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+    const { error } = await supabase.auth.signInWithOtp({
+      email,
+      options: { emailRedirectTo: `${origin}/auth/callback` },
+    });
+    if (error) {
+      setError(error.message);
+      return;
+    }
+    setSent(true);
+  }
 
-  const handleLogin = async () => {
-    console.log("Logging in with:", email, password);
-    // ✅ Call your API here
-  };
+  async function signInWithGoogle() {
+    const supabase = supabaseBrowser();
+    const origin = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: { redirectTo: `${origin}/auth/callback` },
+    });
+    if (error) setError(error.message);
+  }
 
   return (
-    <div className="min-h-screen bg-base-200 flex items-center justify-center px-4">
-      <div className="flex w-full max-w-5xl shadow-xl rounded-xl overflow-hidden bg-base-100">
-        
-        {/* Accent / Info Panel */}
-        <div className="hidden lg:flex flex-col justify-center items-center bg-neutral text-neutral-content p-10 w-1/2">
-          <h2 className="text-4xl font-bold mb-4">Welcome back!</h2>
-          <p className="text-lg opacity-90">
-            Continue your Questal journey - log in to grow your skills and connect
-            with the Filipino community.
+    <div className="min-h-screen flex items-center justify-center bg-base-200">
+      <div className="card w-full max-w-md bg-base-100 shadow-2xl">
+        <div className="card-body space-y-4">
+          <h2 className="card-title text-3xl font-bold justify-center">
+            Welcome to Questal
+          </h2>
+          <p className="text-center text-sm text-gray-500">
+            Sign in with your email or Google
           </p>
-        </div>
 
-        {/* Form Section */}
-        <div className="w-full lg:w-1/2 p-8 sm:p-10">
-          <h1 className="text-3xl font-bold mb-6 text-center">Login</h1>
-          
-          <form className="space-y-4">
-            <LoginEmailInput
-              onChange={(value, valid) => {
-                setEmail(value);
-                setEmailValid(valid);
-              }}
-            />
+          <button onClick={signInWithGoogle} className="btn btn-outline w-full gap-2">
+            <FcGoogle size={20} /> Continue with Google
+          </button>
 
-            <LoginPasswordInput
-              onChange={(value, valid) => {
-                setPassword(value);
-                setPasswordValid(valid);
-              }}
-            />
+          <div className="divider">OR</div>
 
-            <div className="text-right text-sm">
-              <Link href="/forgot-password" className="link link-hover font-bold">
-                Forgot password?
-              </Link>
+          {sent ? (
+            <div className="alert alert-success">
+              <Mail className="w-5 h-5" />
+              <span>
+                Check your inbox — we sent a magic link to <b>{email}</b>.
+              </span>
             </div>
+          ) : (
+            <>
+              {error && <div className="alert alert-error">{error}</div>}
 
-            <SubmitButton
-              formValid={formValid}
-              onSubmit={handleLogin}
-              label="Login"
-              color="btn-success"
-              inactiveColor="btn-neutral"
-            />
-          </form>
+              <form onSubmit={signInWithMagicLink} className="space-y-3">
+                <label className="form-control w-full">
+                  <span className="label-text">Email address</span>
+                  <EmailInput
+                    value={email}
+                    onChange={setEmail}
+                    onValid={setEmailValid}
+                  />
+                </label>
 
-          {/* Signup redirect */}
-          <div className="mt-6 text-sm text-center">
-            Don’t have an account?{" "}
-            <Link href="/signup" className="link link-hover font-bold underline">
-              Sign up
-            </Link>
-          </div>
-
-          {/* Footer Links */}
-          <div className="text-center mt-6 text-xs opacity-80">
-            By continuing, you agree to our{" "}
-            <Link href="/2025/privacy" className="link link-hover underline font-bold">Privacy Policy</Link>{" "}
-            and{" "}
-            <Link href="/2025/terms" className="link link-hover underline font-bold">Terms of Service</Link>.
-          </div>
+                <button
+                  type="submit"
+                  className="btn btn-primary text-white w-full mt-3 gap-2"
+                  disabled={!emailValid}
+                >
+                  <Mail className="w-4 h-4" /> Enter
+                </button>
+              </form>
+            </>
+          )}
         </div>
       </div>
     </div>
