@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
 
-export async function signup(formData: FormData) {
+export async function handleSignup(formData: FormData) {
   const supabase = await createClient();
 
   const email = formData.get("email") as string;
@@ -19,7 +19,7 @@ export async function signup(formData: FormData) {
 
   if (signUpError) {
     console.error("Signup error:", signUpError);
-    redirect("/error"); // or return { error: signUpError.message }
+    redirect("/error"); 
   }
 
   // 2. Create profile row (if user was created)

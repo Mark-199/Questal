@@ -51,6 +51,7 @@ export function EmailInput({ onChange }: EmailInputProps) {
         <span>Email</span>
       </label>
       <input
+        name="email"
         type="email"
         value={email}
         onChange={handleChange}

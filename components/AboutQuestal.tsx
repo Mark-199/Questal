@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 
 export function AboutQuestal() {
@@ -7,43 +5,13 @@ export function AboutQuestal() {
     <section className="bg-primary relative py-16 px-6 md:px-12 rounded-t-lg overflow-hidden">
       {/* Content */}
       <div className="text-white max-w-4xl mx-auto text-center space-y-8">
-        <h2 className="text-4xl md:text-5xl font-bold">What is Questal</h2>
+        <h2 className="text-4xl md:text-5xl font-bold">Discover Questal</h2>
         <p className="text-lg md:text-xl">
-          Take on quests to grow yourself and your community. Students, hobbyists,
-          and change-makers - this is your space to make a difference.
+          Questal is a vibrant community built for purpose-driven growth. Whether you're a student, creative, or community builder, Questal empowers you to embark on meaningful quests — personal or collective — that spark real change.
         </p>
-
-        {/* Interactive Questions */}
-        <div className="questions flex flex-col gap-6 mt-8">
-          <label className="flex flex-col text-left">
-            <span className="mb-2 font-semibold">What challenge would you like to take on in your community?</span>
-            <input
-              type="text"
-              placeholder="Type your quest here..."
-              className="text-black dark:text-white input input-bordered w-full"
-            />
-          </label>
-
-          <label className="flex flex-col text-left">
-            <span className="mb-2 font-semibold">Which skills do you want to grow through Questal?</span>
-            <input
-              type="text"
-              placeholder="Your skills..."
-              className="text-black dark:text-white input input-bordered w-full"
-            />
-          </label>
-
-          <label className="flex flex-col text-left">
-            <span className="mb-2 font-semibold">Who would you like to collaborate with?</span>
-            <input
-              type="text"
-              placeholder="Community members..."
-              className="text-black dark:text-white input input-bordered w-full"
-            />
-          </label>
-
-          <button className="btn btn-secondary mt-4 self-center text-base-content">Submit</button>
-        </div>
+        <p className="text-lg md:text-xl">
+          From honing new skills to collaborating with passionate individuals who share your vision, Questal is the place where ambition transforms into action. Join us and be part of a movement dedicated to learning, growing, and making an impact — one quest at a time.
+        </p>
       </div>
 
       {/* Floating Visual Elements */}

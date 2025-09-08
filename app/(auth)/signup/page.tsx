@@ -1,13 +1,12 @@
 "use client";
 
-import { React, useState } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
-import { supabase } from "@/utils/supabase";
-import { UsernameInput } from '@/components/form/UsernameInput';
-import { EmailInput } from '@/components/form/EmailInput';
-import { PasswordInput } from '@/components/form/PasswordInput';
-import { SubmitButton } from '@/components/form/SubmitButton';
-import { signup } from './action';
+import { UsernameInput } from "@/components/form/UsernameInput";
+import { EmailInput } from "@/components/form/EmailInput";
+import { PasswordInput } from "@/components/form/PasswordInput";
+import { SubmitButton } from "@/components/form/SubmitButton";
+import { handleSignup } from "./action";
 
 export default function SignupPage() {
   const [username, setUsername] = useState("");
@@ -17,7 +16,6 @@ export default function SignupPage() {
   const [password, setPassword] = useState("");
   const [passwordValid, setPasswordValid] = useState(false);
   const [confirmValid, setConfirmValid] = useState(false);
-  const [error, setError] = useState("");
 
   const formValid = usernameValid && emailValid && passwordValid && confirmValid;
 
@@ -27,26 +25,33 @@ export default function SignupPage() {
         
         {/* Form Section */}
         <div className="w-full lg:w-1/2 p-8 sm:p-10">
-          <h1 className="text-3xl font-bold mb-6 text-center">Create an Account</h1>
+          <h1 className="text-3xl font-bold mb-6 text-center">
+            Create an Account
+          </h1>
 
-          <form className="space-y-4">
+          {/* Use server action directly */}
+          <form className="space-y-4" action={handleSignup}>
             {/* Username */}
-            <UsernameInput onChange={(val, valid) => {
-              setUsername(val);
-              setUsernameValid(valid);
-          }}/>
+            <UsernameInput
+              onChange={(val: string, valid: boolean) => {
+                setUsername(val);
+                setUsernameValid(valid);
+              }}
+            />
 
             {/* Email */}
-            <EmailInput onChange={(val, valid) => {
-              setEmail(val);
-              setEmailValid(valid)
-          }}/>
+            <EmailInput
+              onChange={(val: string, valid: boolean) => {
+                setEmail(val);
+                setEmailValid(valid);
+              }}
+            />
 
             {/* Password */}
             <PasswordInput
               label="Password"
               placeholder="Create a password"
-              onChange={(val, valid) => {
+              onChange={(val: string, valid: boolean) => {
                 setPassword(val);
                 setPasswordValid(valid);
               }}
@@ -57,13 +62,12 @@ export default function SignupPage() {
               label="Confirm Password"
               placeholder="Re-enter password"
               checkWith={password}
-              onChange={(val, valid) => setConfirmValid(valid)}
+              onChange={(_val: string, valid: boolean) => setConfirmValid(valid)}
             />
 
             {/* Submit button */}
             <SubmitButton
               formValid={formValid}
-              onSubmit={handleSignup}
               label="Sign up"
               color="btn-success"
               inactiveColor="btn-neutral"
@@ -73,9 +77,7 @@ export default function SignupPage() {
           {/* Login redirect */}
           <div className="mt-6 text-sm text-center">
             Already have an account?{" "}
-            <Link 
-              href="/login"
-              className="link link-hover font-bold underline">
+            <Link href="/login" className="link link-hover font-bold underline">
               Log in
             </Link>
           </div>
@@ -83,9 +85,20 @@ export default function SignupPage() {
           {/* Footer Links */}
           <div className="text-center mt-6 text-xs opacity-80">
             By signing up, you agree to our{" "}
-            <Link href="/2025/privacy" className="link link-hover font-bold underline">Privacy Policy</Link>{" "}
+            <Link
+              href="/2025/privacy"
+              className="link link-hover font-bold underline"
+            >
+              Privacy Policy
+            </Link>{" "}
             and{" "}
-            <Link href="/2025/terms" className="link link-hover font-bold underline">Terms of Service</Link>.
+            <Link
+              href="/2025/terms"
+              className="link link-hover font-bold underline"
+            >
+              Terms of Service
+            </Link>
+            .
           </div>
         </div>
 
@@ -100,4 +113,4 @@ export default function SignupPage() {
       </div>
     </div>
   );
-};
+}

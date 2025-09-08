@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 
 type Step = {
@@ -8,67 +6,83 @@ type Step = {
 };
 
 type PathQuestalProps = {
-  maxSteps?: number; // optional prop, defaults to all
+  maxSteps?: number; // optional, defaults to showing all steps
 };
 
 export function PathQuestal({ maxSteps }: PathQuestalProps) {
   const steps: Step[] = [
     {
-      title: "Step 1: Building the Community",
+      title: "Building the Community",
       description:
-        "Start small, connect students and hobbyists, and grow a supportive local network.",
+        "Start by connecting students and hobbyists to grow a supportive, local network.",
     },
     {
-      title: "Step 2: Launching Quests",
+      title: "Launching Quests",
       description:
-        "Introduce challenges and projects that empower members to learn and make real-world impact.",
+        "Introduce meaningful challenges and projects that empower members to learn and create real-world impact.",
     },
     {
-      title: "Step 3: Knowledge Sharing",
+      title: "Knowledge Sharing",
       description:
-        "Provide tutorials, guides, and shared resources to make learning fun and accessible to everyone.",
+        "Offer tutorials, guides, and shared resources to make learning accessible and enjoyable for everyone.",
     },
     {
-      title: "Step 4: Expanding Reach",
+      title: "Expanding Reach",
       description:
-        "Make Questal available anywhere - so more communities can join the movement for good.",
+        "Bring Questal to more communities worldwide, uniting people in the movement for positive change.",
     },
     {
-      title: "Step 5: Future Vision",
+      title: "Future Vision",
       description:
-        "Evolve into a platform where change-makers collaborate globally while staying rooted locally.",
+        "Evolve into a global platform where change-makers collaborate, while staying grounded in their local communities.",
     },
   ];
 
-  // Apply maxSteps limit (default = all)
+  // Limit visible steps if maxSteps is provided
   const visibleSteps = maxSteps ? steps.slice(0, maxSteps) : steps;
 
   return (
-    <section className="questal-path py-16 px-6 md:px-12 text-base-content rounded-xl">
-      <div className="max-w-5xl mx-auto text-center space-y-8">
-        <h2 className="text-4xl md:text-5xl font-bold text-primary">
+    <section
+      className="questal-path py-16 px-6 md:px-12 rounded-xl text-base-content"
+      aria-labelledby="path-questal-title"
+    >
+      <div className="max-w-5xl mx-auto text-center space-y-6">
+        <h2
+          id="path-questal-title"
+          className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-primary"
+        >
           The Questal Path
         </h2>
-        <p className="text-lg md:text-xl">
-          Here’s our journey ahead - one step at a time, together with you.
+        <p className="text-lg md:text-xl lg:text-2xl max-w-3xl mx-auto">
+          Our journey forward — one meaningful step at a time, together with you.
         </p>
 
         {/* Steps Timeline */}
-        <ul className="steps steps-vertical lg:steps-horizontal w-full mt-10">
-          {visibleSteps.map((step, i) => (
+        <ol
+          className="
+            steps steps-vertical lg:steps-horizontal w-full mt-12
+            gap-8 lg:gap-4
+            pl-4 sm:pl-6 md:pl-8
+          "
+        >
+          {visibleSteps.map((step, index) => (
             <li
-              key={i}
+              key={index}
               className="step step-primary text-base-content"
-              data-content={i + 1}
-              aria-label={step.title}
+              aria-label={`Step ${index + 1}: ${step.title}`}
+              data-content={index + 1}
             >
-              <div className="p-4 max-w-xs mx-auto">
-                <h3 className="font-bold">{step.title}</h3>
-                <p className="text-sm opacity-80 mt-2">{step.description}</p>
+              <div className="p-5 max-w-xs mx-auto text-left">
+                <h3 className="font-semibold text-lg md:text-xl lg:text-2xl mb-2">
+                  {step.title}
+                </h3>
+                <p className="text-sm md:text-base lg:text-lg text-gray-700 dark:text-gray-300 opacity-90">
+                  {step.description}
+                </p>
               </div>
             </li>
           ))}
-        </ul>
+        </ol>
       </div>
     </section>
   );
