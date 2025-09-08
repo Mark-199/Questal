@@ -137,7 +137,7 @@ export const Header: React.FC<HeaderProps> = ({
               >
                 {user.user_metadata?.avatar_url ? (
                   <Image
-                    src={user.user_metadata.avatar_url || "/default.png"}
+                    src={user.user_metadata.avatar_url || "/Default.jpg"}
                     alt="User Avatar"
                     width={32}
                     height={32}
