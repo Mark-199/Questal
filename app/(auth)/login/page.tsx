@@ -4,9 +4,11 @@ import { useState } from "react";
 import { supabaseBrowser } from "@/utils/supabase/client";
 import { Mail } from "lucide-react";
 import { FcGoogle } from "react-icons/fc";
-import { EmailInput } from "./EmailInput"; // same folder
+import { useCreateProfileOnLogin } from "@/components/hooks/CreateProfile";
+import { EmailInput } from "./EmailInput";
 
 export default function LoginPage() {
+  useCreateProfileOnLogin();
   const [email, setEmail] = useState("");
   const [sent, setSent] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -14,10 +16,10 @@ export default function LoginPage() {
 
   async function signInWithMagicLink(e: React.FormEvent) {
     e.preventDefault();
-    if (!emailValid) return; // prevent sending if invalid
+    if (!emailValid) return; 
     setError(null);
     const supabase = supabaseBrowser();
-    const origin = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+    const origin = process.env.NEXT_PUBLIC_SITE_URL;
     const { error } = await supabase.auth.signInWithOtp({
       email,
       options: { emailRedirectTo: `${origin}/auth/callback` },
@@ -31,7 +33,7 @@ export default function LoginPage() {
 
   async function signInWithGoogle() {
     const supabase = supabaseBrowser();
-    const origin = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+    const origin = process.env.NEXT_PUBLIC_SITE_URL;
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: { redirectTo: `${origin}/auth/callback` },

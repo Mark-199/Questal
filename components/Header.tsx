@@ -6,6 +6,7 @@ import Image from "next/image";
 import { supabaseBrowser } from "@/utils/supabase/client";
 import { User } from "@supabase/supabase-js"; 
 import { usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 interface HeaderProps {
   title: string;
@@ -26,6 +27,7 @@ export const Header: React.FC<HeaderProps> = ({
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [clicked, setClicked] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
 
   useEffect(() => {
     const supabase = supabaseBrowser();
@@ -61,7 +63,9 @@ export const Header: React.FC<HeaderProps> = ({
     await supabase.auth.signOut();
     setUser(null);
     setDropdownOpen(false);
+    router.push("/login");
   }
+
 
   return (
     <header className="w-full px-4 md:px-6 lg:px-8 py-4 md:py-5 lg:py-6 shadow-md flex items-center justify-between bg-base-100">
@@ -130,6 +134,16 @@ export const Header: React.FC<HeaderProps> = ({
           Dashboard
         </Link>
       )}
+
+      {pathname === "/dashboard" && (
+        <Link
+          href="/feed"
+          className="btn btn-primary text-white rounded md:text-base lg:text-lg md:px-4 md:py-2 lg:px-5 lg:py-3"
+        >
+          Feed
+        </Link>
+      )}
+
             <div className={`dropdown dropdown-end ${dropdownOpen ? "dropdown-open" : ""}`}>
               <button
                 onClick={() => setDropdownOpen(!dropdownOpen)}
@@ -157,6 +171,11 @@ export const Header: React.FC<HeaderProps> = ({
                 <li>
                   <Link href="/profile" className="px-4 py-2">
                     Profile
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/setting" className="px-4 py-2">
+                    Settings
                   </Link>
                 </li>
                 <li>

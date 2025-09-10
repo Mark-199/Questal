@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [theme, setTheme] = useState("lemonade"); // default light theme
+  const [theme, setTheme] = useState("lemonade");
 
   useEffect(() => {
     const html = document.documentElement;
@@ -12,7 +12,6 @@ const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) =>
     const applyTheme = (dark: boolean) => {
       const themeName = dark ? "forest" : "lemonade";
       html.setAttribute("data-theme", themeName);
-      body.setAttribute("data-theme", themeName);
       setTheme(themeName);
     };
 

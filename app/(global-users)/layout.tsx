@@ -8,7 +8,7 @@ import { Header } from "@/components/Header";
 
 
 export const metadata: Metadata = {
-  title: "Questal",
+  title: "Feed | Questal",
   description: "Questal app for everyone",
   icons: {
     icon: "/Questal.png", 
@@ -26,12 +26,7 @@ export default function RootLayout({
     <Header
       title="Questal"
       logoSrc="/Questal.png"
-      navLinks={[
-        { name: "About", href: "/about" },
-        { name: "Event", href: "/event" },
-        { name: "Community", href: "/community" },
-        { name: "Star", href: "/star" },
-      ]}
+      navLinks={[]}
     />
     <ThemeProvider>{children}</ThemeProvider>
     <Footer />

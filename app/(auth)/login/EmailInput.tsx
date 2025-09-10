@@ -62,7 +62,7 @@ export function EmailInput({ value, onChange, onValid }: EmailInputProps) {
     <div className="flex flex-col w-full">
       <input
         type="email"
-        placeholder="you@example.com"
+        placeholder="john@gmail.com"
         value={value}
         onChange={(e) => onChange(e.target.value)}
         className={`input input-bordered w-full ${

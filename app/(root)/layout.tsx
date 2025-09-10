@@ -33,7 +33,6 @@ export default function RootLayout({
         { name: "Star", href: "/star" },
       ]}
     />
-    <LoadingOverlay />
     <ThemeProvider>{children}</ThemeProvider>
     <Footer />
   </body>

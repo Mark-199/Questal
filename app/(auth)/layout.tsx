@@ -28,7 +28,6 @@ export default function RootLayout({
         navLinks={[]}
         actions={[]}
       />
-      <LoadingOverlay />
         <ThemeProvider>
             {children}
         </ThemeProvider>

@@ -28,7 +28,6 @@ export default function RootLayout({
       logoSrc="/Questal.png"
       navLinks={[]}
     />
-    <LoadingOverlay />
     <ThemeProvider>{children}</ThemeProvider>
     <Footer />
   </body>
